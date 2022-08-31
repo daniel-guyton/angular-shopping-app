@@ -1,0 +1,39 @@
+
+<ng-container *ngIf="true">
+  <div class="card-table">
+    <div class="class-product" >
+      <table>
+        <div  *ngFor="let product of products" class="border-product">
+        <tr class="product-item">
+          <td><img src="{{product.image}}" alt="photo of clothing"></td>
+          <td>{{product.title}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.cost}}</td>
+
+          <td><fa-icon class="trash" [icon]="trash" (click)="deleteItem(product)"></fa-icon></td>
+        </tr>
+       </div>
+      </table>
+      <p>Quantity: {{products.length}}</p>
+      <p>Total: {{grandTotal}}</p>
+      <button (click)="onBtnClick()">Continue Shopping</button>
+      <button>Checkout</button>
+
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="false">
+  <div class="container">
+  <div class="card">
+    <h5 class="title">
+      My Cart
+    </h5>
+  </div>
+  <div class="center">
+    <img src="" alt="">
+    <h4>Your cart is empty</h4>
+    <button>Shop Now</button>
+  </div>
+  </div>
+
+</ng-container>

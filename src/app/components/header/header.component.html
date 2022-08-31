@@ -1,0 +1,17 @@
+<header>
+  <div class="navbar">
+    {{ title }}
+    <div class="form-group">
+      <span>
+        <fa-icon [icon]="searchIcon" class="search"></fa-icon>
+      </span>
+      <input type="text" placeholder="Search for item">
+    </div>
+    <div class="cart-icon-count" (click)="btnClick()">
+      <fa-icon class="icon" [icon]="cartIcon"></fa-icon>
+      <span class="item-count">{{totalItems}}</span>
+    </div>
+
+
+  </div>
+</header>

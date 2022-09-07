@@ -14,7 +14,7 @@ export class HeaderComponent implements AfterViewInit {
   totalItems: number = 0
   searchIcon: any = faSearch
   cartIcon: any = faCartShopping
-  title: string = 'Shopping app'
+  title: string = 'SHOPPING APP'
 
   constructor(
     private cartService: CartService,

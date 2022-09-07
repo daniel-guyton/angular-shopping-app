@@ -1,15 +1,11 @@
+
 <header>
   <div class="navbar">
-    {{ title }}
-    <div class="form-group">
-      <span>
-        <fa-icon [icon]="searchIcon" class="search"></fa-icon>
-      </span>
-      <input type="text" placeholder="Search for item">
-    </div>
-    <div class="cart-icon-count" (click)="btnClick()">
-      <fa-icon class="icon" [icon]="cartIcon"></fa-icon>
-      <span class="item-count">{{totalItems}}</span>
+    <p class="title">{{title}}</p>
+    <div class="nav-content" (click)="btnClick()">
+      <a href="#"><p>SEARCH</p></a>
+      <a href="#"><p>ABOUT</p></a>
+      <a (click)="btnClick()"><p>BAG</p></a>
     </div>
 
 

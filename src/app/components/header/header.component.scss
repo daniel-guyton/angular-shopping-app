@@ -2,52 +2,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #f1f1f1;
-  font-family: Helvetica, sans-serif;
   color: #333333;
+  height: 64px;
+  padding: 0 3.90625vw;
 }
 
-.search {
-  margin-right: 5px;
-  align-self: center;
-}
-
-.form-group {
-  display: flex;
-  align-items: center;
-  border: none;
-  background-color: #f1f1f1;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 10px;
-}
-
-.search {
-  color: grey;
-}
-input {
-  border: none;
-  background-color: #f1f1f1;
-  border-radius: 5px;
-  font-size: 10px;
-  width: 100%;
+.title {
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: 2pt;
 }
 
 .icon:hover {
   cursor: pointer;
 }
 
-.item-count {
-  font-size: 15px;
-  position: absolute;
-  margin-left: -5px;
-  margin-top: -5px;
-  color: #f1f1f1;
-  height: 18px;
-  width: 18px;
-  background-color: #333333;
-  border-radius: 50%;
-  text-align: center;
-  border: 2px solid #f1f1f1;
+.nav-content {
+  display: flex;
+
 }
+
+.nav-content > a{
+  text-decoration: none;
+  color: #333333;
+  padding: 0px 10px;
+  font-size: 16px;
+}
+
+.nav-content > a > p:hover {
+  border-bottom: 1px solid #333333;
+}
+

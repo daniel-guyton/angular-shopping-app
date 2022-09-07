@@ -5,10 +5,9 @@
       <table>
         <div  *ngFor="let product of products" class="border-product">
         <tr class="product-item">
-          <td><img src="{{product.image}}" alt="photo of clothing"></td>
-          <td>{{product.title}}</td>
-          <td>{{product.description}}</td>
-          <td>{{product.cost}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.desc}}</td>
+          <td>{{product.price}}</td>
 
           <td><fa-icon class="trash" [icon]="trash" (click)="deleteItem(product)"></fa-icon></td>
         </tr>

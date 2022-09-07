@@ -4,7 +4,6 @@
      <div class="container">
        <div class="product" *ngFor="let product of products">
           <p>{{product.title}}</p>
-          <img src="{{product.image}}">
           <p>Price: ${{product.price}}</p>
          <button (click)="addToCart(product)">Add to cart</button>
        </div>

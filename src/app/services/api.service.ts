@@ -12,7 +12,7 @@ export class ApiService {
   ) {}
 
   getProducts() {
-   return this.http.get<any>('https://fakestoreapi.com/products/')
+   return this.http.get<any>('https://1kc4okp399.execute-api.ap-southeast-2.amazonaws.com/test')
     .pipe(map((res: Response) => {
       console.log(res)
       return res;

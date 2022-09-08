@@ -12,7 +12,7 @@ export class ApiService {
   ) {}
 
   getProducts() {
-   return this.http.get<any>('https://k6mi58clfb.execute-api.ap-southeast-2.amazonaws.com/test')
+   return this.http.get<any>(`${process.env['API_GW']}`)
     .pipe(map((res: Response) => {
       console.log(res)
       return res;

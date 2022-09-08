@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  api_gw_url: process.env.NG_APP_API_GW
 };
 
 /*

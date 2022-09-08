@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333333;
+  height: 64px;
+  padding: 0 3.90625vw;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: 2pt;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.nav-content {
+  display: flex;
+
+}
+
+.nav-content > a{
+  text-decoration: none;
+  color: #333333;
+  padding: 0px 10px;
+  font-size: 16px;
+}
+
+.nav-content > a > p:hover {
+  border-bottom: 1px solid #333333;
+}
+

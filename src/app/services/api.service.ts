@@ -12,7 +12,7 @@ export class ApiService {
   ) {}
 
   getProducts() {
-   return this.http.get<any>(`${process.env['API_GW']}`)
+   return this.http.get<any>(`${process.env['NG_APP_API_GW']}`)
     .pipe(map((res: Response) => {
       console.log(res)
       return res;

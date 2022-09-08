@@ -3,7 +3,7 @@
 .container {
 
   display: flex;
-  text-align: center;
+  text-align: left;
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
@@ -50,4 +50,8 @@ button:hover {
 .product:hover {
   background-color: aliceblue;
   transition: 1s ease-out;
+}
+
+.product > img {
+  max-width: 200px
 }

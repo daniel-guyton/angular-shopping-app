@@ -5,8 +5,8 @@
       <table>
         <div  *ngFor="let product of products" class="border-product">
         <tr class="product-item">
+          <td><img src="{{product.img_src}}" alt="image of shoe"></td>
           <td>{{product.name}}</td>
-          <td>{{product.desc}}</td>
           <td>{{product.price}}</td>
 
           <td><fa-icon class="trash" [icon]="trash" (click)="deleteItem(product)"></fa-icon></td>
@@ -29,7 +29,7 @@
     </h5>
   </div>
   <div class="center">
-    <img src="" alt="">
+
     <h4>Your cart is empty</h4>
     <button>Shop Now</button>
   </div>

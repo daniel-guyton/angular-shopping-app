@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ApiService {
 
 
   getProducts() {
-   return this.http.get<any>(environment.api_gw_url)
+   return this.http.get<any>(process.env.NG_APP_API_GW)
     .pipe(map((res: Response) => {
       console.log(res)
       return res;

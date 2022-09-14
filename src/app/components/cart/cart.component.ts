@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {faTrash} from '@fortawesome/free-solid-svg-icons';
 import {CartService} from 'src/app/services/cart.service';
 import {Router} from '@angular/router'
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
   ) {
   }
 

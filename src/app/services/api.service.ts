@@ -38,7 +38,7 @@ export class ApiService {
 
   addProduct(product: any) {
     // console.log(product)
-    this.http.post<any>(process.env.NG_APP_API_GW, product)
+    return this.http.post<any>(process.env.NG_APP_API_GW, product)
     .pipe(map(() => {
       console.log(product)
     }))

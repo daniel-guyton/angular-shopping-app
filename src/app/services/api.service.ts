@@ -38,10 +38,12 @@ export class ApiService {
 
   addProduct(product: any) {
     this.http.post<any>(process.env.NG_APP_API_GW, product)
-      .pipe(
-        catchError((err: HttpErrorResponse) => {
-          return throwError(err)
-        })
-      )
+      // .pipe(
+        console.log(product)
+        // catchError((err: HttpErrorResponse) => {
+        //   return throwError(err)
+        // })
+
+      // )
   }
 }

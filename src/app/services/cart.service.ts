@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 
@@ -18,10 +18,16 @@ export class CartService {
     return this.productsList.asObservable()
   }
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }
 
   addToCart(product: any) {
-    console.log(product)
-    this.http.post<any>(process.env.NG_APP_API_GW, product)
+
+
+    return this.http.post<any>("https://54f87cx2fj.execute-api.ap-southeast-2.amazonaws.com/test", product, this.httpOptions)
     .pipe(map((product): any => {
       this.cartItemList.push(product);
       this.productsList.next(this.cartItemList);

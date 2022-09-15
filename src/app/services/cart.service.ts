@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { RequestOptions } from 'https';
 import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
@@ -18,9 +19,32 @@ export class CartService {
     return this.productsList.asObservable()
   }
 
-
+    headers = new HttpHeaders(
+      {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": [
+          "POST",
+          "GET",
+          "OPTIONS",
+          "DELETE",
+          "PUT",
+        ],
+        "Access-Control-Allow-Headers": [
+          "append",
+          "delete",
+          "entries",
+          "foreach",
+          "get",
+          "has",
+          "keys",
+          "set",
+          "values",
+          "Authorization",
+        ],
+      }
+    )
   addToCart(product: any) {
-    return this.http.post<any>(process.env.NG_APP_API_GW, product)
+    return this.http.post<any>(process.env.NG_APP_API_GW, product, {headers: this.headers})
     .pipe(map((product): any => {
       this.cartItemList.push(product);
       this.productsList.next(this.cartItemList);

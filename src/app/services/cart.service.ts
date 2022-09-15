@@ -18,19 +18,11 @@ export class CartService {
     return this.productsList.asObservable()
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
-    })
-  }
+
   addToCart(product: any) {
 
 
-    return this.http.post<any>(process.env.NG_APP_API_GW, product, this.httpOptions)
+    return this.http.post<any>(process.env.NG_APP_API_GW, product)
     .pipe(map((product): any => {
       this.cartItemList.push(product);
       this.productsList.next(this.cartItemList);

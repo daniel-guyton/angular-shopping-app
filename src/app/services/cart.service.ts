@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +19,13 @@ export class CartService {
   }
 
 
-   addToCart(product: any) {
-    this.cartItemList.push(product);
-    this.productsList.next(this.cartItemList);
-    this.getTotalPrice();
-    return this.http.post<any>(process.env.NG_APP_API_GW, product)
-    .pipe((): any => {
-      console.log('addToCart error')
-    })
+  addToCart(product: any) {
+    this.http.post<any>(process.env.NG_APP_API_GW, product)
+    .pipe(map((product): any => {
+      this.cartItemList.push(product);
+      this.productsList.next(this.cartItemList);
+      this.getTotalPrice();
+    }))
   }
   getTotalPrice(): any {
     let grandTotal = 0;

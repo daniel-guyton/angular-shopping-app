@@ -24,11 +24,12 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  addToCart(item: any) {
-    this.api.addProduct(item).subscribe(data => {
-      console.log(data)
-    }, error => {
-      console.log(error)
-    })
-  }
+  // addToCart(item: any) {
+  //   this.api.addProduct(item)
+  //     .subscribe((data: any) => {
+  //     console.log(data)
+  //   }, error => {
+  //     console.log(error)
+  //   })
+  // }
 }

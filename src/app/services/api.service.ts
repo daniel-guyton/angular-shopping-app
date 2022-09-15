@@ -32,7 +32,7 @@ export class ApiService {
    return this.http.get<any>(process.env.NG_APP_API_GW)
     .pipe(map((res: Response) => {
       console.log(res)
-      return res.body;
+      return res;
     }))
   }
 

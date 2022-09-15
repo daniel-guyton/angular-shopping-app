@@ -30,7 +30,7 @@ export class CartService {
   addToCart(product: any) {
 
 
-    return this.http.post<any>("https://54f87cx2fj.execute-api.ap-southeast-2.amazonaws.com/test", product, this.httpOptions)
+    return this.http.post<any>(process.env.NG_APP_API_GW, product, this.httpOptions)
     .pipe(map((product): any => {
       this.cartItemList.push(product);
       this.productsList.next(this.cartItemList);

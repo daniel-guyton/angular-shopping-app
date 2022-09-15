@@ -2,11 +2,12 @@
   <ng-container >
    <div class="outer-container">
      <div class="container">
-       <div class="product" *ngFor="let product of products">
+       <div class="product" *ngFor="let product of products.body">
           <img src="{{product.img_src}}">
           <p>{{product.name}}</p>
           <p>Price: ${{product.price}}</p>
-          <button (click)="addToCart(product)">Add to cart</button>
+          <button >Add to cart</button>
+          <!-- (click)="addToCart(product)" -->
        </div>
      </div>
    </div>

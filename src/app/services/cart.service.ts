@@ -18,32 +18,15 @@ export class CartService {
     return this.productsList.asObservable()
   }
 
-    headers = new HttpHeaders(
+
+  addToCart(product: any) {
+    const headers = new HttpHeaders(
       {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": [
-          "POST",
-          "GET",
-          "OPTIONS",
-          "DELETE",
-          "PUT",
-        ],
-        "Access-Control-Allow-Headers": [
-          "append",
-          "delete",
-          "entries",
-          "foreach",
-          "get",
-          "has",
-          "keys",
-          "set",
-          "values",
-          "Authorization",
-        ],
+        "Access-Control-Allow-Methods": "*"
       }
     )
-  addToCart(product: any) {
-    return this.http.post<any>(process.env.NG_APP_API_GW, product, {headers: this.headers})
+    return this.http.post<any>(process.env.NG_APP_API_GW, product, {...headers})
     .pipe(map((product): any => {
       this.cartItemList.push(product);
       this.productsList.next(this.cartItemList);

@@ -19,8 +19,14 @@ export class CartService {
   }
 
 
-  async addToCart(product: any) {
-    await this.http.post<any>(process.env.NG_APP_API_GW, product)
+  addToCart(product: any) {
+    const headers = new HttpHeaders(
+      {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*"
+      }
+    )
+    return this.http.post<any>(process.env.NG_APP_API_GW, product, {...headers})
     .pipe(map((product): any => {
       this.cartItemList.push(product);
       this.productsList.next(this.cartItemList);

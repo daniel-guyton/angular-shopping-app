@@ -1,5 +1,5 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {faCartShopping, faSearch} from '@fortawesome/free-solid-svg-icons';
+import {faCartShopping, faSearch, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {CartService} from 'src/app/services/cart.service';
 import {Router} from '@angular/router'
 
@@ -12,8 +12,8 @@ import {Router} from '@angular/router'
 export class HeaderComponent implements AfterViewInit {
 
   totalItems: number = 0
-  searchIcon: any = faSearch
-  cartIcon: any = faCartShopping
+  searchIcon: IconDefinition = faSearch
+  cartIcon: IconDefinition = faCartShopping
   title: string = 'SHOPPING APP'
 
   constructor(
@@ -29,7 +29,7 @@ export class HeaderComponent implements AfterViewInit {
       })
   }
 
-  async btnClick() {
+  async btnClick(): Promise<void> {
     await this.router.navigateByUrl('/cart')
   }
 }

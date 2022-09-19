@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class CartService {
     private http: HttpClient
     ) {}
 
-  getProducts() {
+  getProducts(): Observable<number | string>{
     return this.productsList.asObservable()
   }
 

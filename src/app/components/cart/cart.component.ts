@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faTrash, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {CartService} from 'src/app/services/cart.service';
 import {Router} from '@angular/router'
 import { ApiService } from 'src/app/services/api.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  trash: any = faTrash
+  trash: IconDefinition= faTrash
   products: any = []
   grandTotal: any;
 
@@ -29,9 +30,19 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartService.getProducts().subscribe(res => {
-      this.products = res;
-      this.grandTotal = this.cartService.getTotalPrice()
+    // this.cartService.getProducts().subscribe((res) => {
+    //   this.products = res;
+    //   this.grandTotal = this.cartService.getTotalPrice()
+    // }, (error) => {
+    //   throw Nerw
+    // })
+    this.cartService.getProducts()
+    .subscribe({
+      next: (res) => {
+        this.products = res
+        this.grandTotal = this.cartService.getTotalPrice
+      },
+      error: (err) => console.error(err)
     })
   }
 

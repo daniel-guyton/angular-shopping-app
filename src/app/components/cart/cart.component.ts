@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
     .subscribe({
       next: (res) => {
         this.products = res
-        this.grandTotal = this.cartService.getTotalPrice
+        this.grandTotal = this.cartService.getTotalPrice()
       },
       error: (err) => console.error(err)
     })

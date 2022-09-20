@@ -1,6 +1,5 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {faCartShopping, faSearch, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {CartService} from 'src/app/services/cart.service';
 import {Router} from '@angular/router'
 
 @Component({
@@ -17,7 +16,6 @@ export class HeaderComponent implements AfterViewInit {
   title: string = 'SHOPPING APP'
 
   constructor(
-    private cartService: CartService,
     private router: Router
   ) {
   }

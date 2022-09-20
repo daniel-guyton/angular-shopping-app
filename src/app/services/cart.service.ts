@@ -7,16 +7,13 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 })
 export class CartService {
 
+
   cartItemList: any = [];
-  productsList = new BehaviorSubject<any>([]);
 
   constructor(
     private http: HttpClient
     ) {}
 
-  getProducts(): Observable<number | string>{
-    return this.productsList.asObservable()
-  }
 
 
   addToCart(product: any) {
@@ -28,11 +25,19 @@ export class CartService {
     )
     return this.http.post<any>(process.env.NG_APP_API_GW, product, {...headers})
     .pipe(map((product): any => {
-      this.cartItemList.push(product);
-      this.productsList.next(this.cartItemList);
-      this.getTotalPrice();
+      console.log(product)
     }))
   }
+
+  getUserCart() {
+    return this.http.get(process.env.NG_APP_API_GW + '/getUserCart')
+    .pipe(map((res: any) => {
+      console.log(res)
+      return res;
+    }))
+  }
+
+
   getTotalPrice(): any {
     let grandTotal = 0;
     this.cartItemList.map((item: any) => {

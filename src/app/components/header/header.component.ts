@@ -23,10 +23,6 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.cartService.getProducts()
-      .subscribe((res: any) => {
-        return this.totalItems = res.length
-      })
   }
 
   async btnClick(): Promise<void> {

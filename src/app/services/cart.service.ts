@@ -7,6 +7,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 })
 export class CartService {
 
+
   cartItemList: any = [];
   productsList = new BehaviorSubject<any>([]);
 
@@ -33,6 +34,12 @@ export class CartService {
       this.getTotalPrice();
     }))
   }
+
+  getUserCart() {
+    return this.http.get(process.env.NG_APP_API_GW + '/getUserCart')
+  }
+
+
   getTotalPrice(): any {
     let grandTotal = 0;
     this.cartItemList.map((item: any) => {

@@ -44,7 +44,11 @@ export class CartComponent implements OnInit {
       },
       error: (err) => console.error(err)
     })
+
+      this.cartService.getUserCart().subscribe()
   }
+
+
 
   async onBtnClick() {
     await this.router.navigateByUrl('/')

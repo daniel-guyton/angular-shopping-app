@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {faTrash, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {CartService} from 'src/app/services/cart.service';
 import {Router} from '@angular/router'
-import { ApiService } from 'src/app/services/api.service';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -12,8 +10,8 @@ import { of } from 'rxjs';
 })
 export class CartComponent implements OnInit {
   trash: IconDefinition= faTrash
-  products: any = []
-  grandTotal: any;
+  public cartItemList: any;
+  grandTotal!: number;
 
   constructor(
     private cartService: CartService,
@@ -21,30 +19,25 @@ export class CartComponent implements OnInit {
   ) {
   }
 
-  deleteItem(product: any) {
-    const index: number = this.products.indexOf(product)
-    if (index !== -1) {
-      this.products.splice(index, 1);
-    }
-    this.grandTotal = this.cartService.getTotalPrice()
+  deleteItemFromCart(product: any) {
+    this.cartService.deleteProductFromCart(product)
+    .subscribe(() => {
+      const index: number = this.cartItemList.indexOf(product)
+      if (index !== -1) {
+        this.cartItemList.splice(index, 1);
+      }
+    })
   }
 
   ngOnInit(): void {
-    // this.cartService.getProducts().subscribe((res) => {
-    //   this.products = res;
-    //   this.grandTotal = this.cartService.getTotalPrice()
-    // }, (error) => {
-    //   throw Nerw
+    this.grandTotal = this.cartService.getTotalPrice()
 
-      this.cartService.getUserCart().subscribe({
-        next: (res) => {
-        this.products = res
-        this.grandTotal = this.cartService.getTotalPrice()
-      },
-      error: (err) => console.error(err)})
+    this.cartService.getUserCart()
+    .subscribe((res: Response) => {
+      this.cartItemList = res
+      console.log(this.cartItemList)
+    })
   }
-
-
 
   async onBtnClick() {
     await this.router.navigateByUrl('/')

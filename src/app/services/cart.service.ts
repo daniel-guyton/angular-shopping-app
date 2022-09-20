@@ -8,7 +8,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 export class CartService {
 
 
-  cartItemList: any = [];
+  cartItemList = [];
 
   constructor(
     private http: HttpClient
@@ -16,6 +16,12 @@ export class CartService {
 
 
 
+  deleteProductFromCart(product: any) {
+    return this.http.delete(`${process.env.NG_APP_API_GW}/${product.id}`)
+    .pipe((): any => {
+      console.log('sucess')
+    })
+  }
   addToCart(product: any) {
     const headers = new HttpHeaders(
       {
@@ -33,16 +39,12 @@ export class CartService {
     return this.http.get<any>(process.env.NG_APP_API_GW + '/getUserCart')
     .pipe(map((res: any) => {
       console.log(res)
+      this.cartItemList = res
       return res;
     }))
   }
 
-
-  getTotalPrice(): any {
-    let grandTotal = 0;
-    this.cartItemList.map((item: any) => {
-      grandTotal += item.price
-    })
-    return grandTotal
+  getTotalPrice(): number {
+    return this.cartItemList.reduce((total: number, item: any) => total + (item.product.price * item.qty), 0)
   }
 }

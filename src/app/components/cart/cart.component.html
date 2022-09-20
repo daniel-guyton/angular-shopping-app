@@ -3,17 +3,16 @@
   <div class="card-table">
     <div class="class-product" >
       <table>
-        <div *ngFor="let body of products" class="border-product">
+        <div *ngFor="let item of cartItemList.body" class="border-product">
         <tr class="product-item">
-          <td><img src="{{body.product.img_src}}" alt="image of shoe"></td>
-          <td>{{body.product.name}}</td>
-          <td>{{body.product.price}}</td>
-          <td>{{body.qty}}</td>
-          <td><fa-icon class="trash" [icon]="trash" (click)="deleteItem(body.product)"></fa-icon></td>
+          <td><img src="{{item.product.img_src}}" alt="image of shoe"></td>
+          <td>{{item.product.name}}</td>
+          <td>{{item.product.price}}</td>
+          <td>{{item.qty}}</td>
+          <td><fa-icon class="trash" [icon]="trash" (click)="deleteItem(item.product)"></fa-icon></td>
         </tr>
        </div>
       </table>
-      <p>Quantity: {{products.length}}</p>
       <p>Total: {{grandTotal}}</p>
       <button (click)="onBtnClick()">Continue Shopping</button>
       <button>Checkout</button>

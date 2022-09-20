@@ -3,13 +3,13 @@
   <div class="card-table">
     <div class="class-product" >
       <table>
-        <div *ngFor="let product of products" class="border-product">
+        <div *ngFor="let body of products" class="border-product">
         <tr class="product-item">
-          <td><img src="{{product.img_src}}" alt="image of shoe"></td>
-          <td>{{product.name}}</td>
-          <td>{{product.price}}</td>
-
-          <td><fa-icon class="trash" [icon]="trash" (click)="deleteItem(product)"></fa-icon></td>
+          <td><img src="{{body.product.img_src}}" alt="image of shoe"></td>
+          <td>{{body.product.name}}</td>
+          <td>{{body.product.price}}</td>
+          <td>{{body.qty}}</td>
+          <td><fa-icon class="trash" [icon]="trash" (click)="deleteItem(body.product)"></fa-icon></td>
         </tr>
        </div>
       </table>

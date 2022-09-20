@@ -30,7 +30,7 @@ export class CartService {
   }
 
   getUserCart() {
-    return this.http.get(process.env.NG_APP_API_GW + '/getUserCart')
+    return this.http.get<any>(process.env.NG_APP_API_GW + '/getUserCart')
     .pipe(map((res: any) => {
       console.log(res)
       return res;

@@ -3,7 +3,7 @@
   <div class="card-table">
     <div class="class-product" >
       <table>
-        <div *ngFor="let body of products" class="border-product">
+        <div *ngFor="let body of cartItemList" class="border-product">
         <tr class="product-item">
           <td><img src="{{body.product.img_src}}" alt="image of shoe"></td>
           <td>{{body.product.name}}</td>
@@ -13,7 +13,7 @@
         </tr>
        </div>
       </table>
-      <p>Quantity: {{products.length}}</p>
+      <p>Quantity: {{cartItemList.length}}</p>
       <p>Total: {{grandTotal}}</p>
       <button (click)="onBtnClick()">Continue Shopping</button>
       <button>Checkout</button>

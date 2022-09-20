@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 })
 export class CartComponent implements OnInit {
   trash: IconDefinition= faTrash
-  products: any = []
+  public cartItemList: any = []
   grandTotal: any;
 
   constructor(
@@ -22,27 +22,32 @@ export class CartComponent implements OnInit {
   }
 
   deleteItem(product: any) {
-    const index: number = this.products.indexOf(product)
+    const index: number = this.cartItemList.indexOf(product)
     if (index !== -1) {
-      this.products.splice(index, 1);
+      this.cartItemList.splice(index, 1);
     }
     this.grandTotal = this.cartService.getTotalPrice()
   }
 
   ngOnInit(): void {
-    // this.cartService.getProducts().subscribe((res) => {
-    //   this.products = res;
+    // this.cartService.getcartItemList().subscribe((res) => {
+    //   this.cartItemList = res;
     //   this.grandTotal = this.cartService.getTotalPrice()
     // }, (error) => {
     //   throw Nerw
 
-      this.cartService.getUserCart().subscribe({
-        next: (res) => {
-        console.log(res)
-        this.products = res
-        this.grandTotal = this.cartService.getTotalPrice()
-      },
-      error: (err) => console.error(err)})
+      // this.cartService.getUserCart().subscribe({
+      //   next: (res) => {
+      //   console.log(res)
+      //   this.cartItemList = res
+      //   this.grandTotal = this.cartService.getTotalPrice()
+      // },
+      // error: (err) => console.error(err)})
+
+    this.cartService.getUserCart()
+    .subscribe((res: Response) => {
+      this.cartItemList = res
+    })
   }
 
 

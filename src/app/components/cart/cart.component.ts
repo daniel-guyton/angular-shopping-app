@@ -38,6 +38,7 @@ export class CartComponent implements OnInit {
 
       this.cartService.getUserCart().subscribe({
         next: (res) => {
+        console.log(res)
         this.products = res
         this.grandTotal = this.cartService.getTotalPrice()
       },

@@ -35,17 +35,13 @@ export class CartComponent implements OnInit {
     //   this.grandTotal = this.cartService.getTotalPrice()
     // }, (error) => {
     //   throw Nerw
-    // })
-    this.cartService.getProducts()
-    .subscribe({
-      next: (res) => {
+
+      this.cartService.getUserCart().subscribe({
+        next: (res) => {
         this.products = res
         this.grandTotal = this.cartService.getTotalPrice()
       },
-      error: (err) => console.error(err)
-    })
-
-      this.cartService.getUserCart().subscribe()
+      error: (err) => console.error(err)})
   }
 
 

@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 })
 export class CartComponent implements OnInit {
   trash: IconDefinition= faTrash
-  public cartItemList: any = []
+  public cartItemList: any;
   grandTotal: any;
 
   constructor(
@@ -47,6 +47,7 @@ export class CartComponent implements OnInit {
     this.cartService.getUserCart()
     .subscribe((res: Response) => {
       this.cartItemList = res
+      console.log(this.cartItemList)
     })
   }
 

@@ -8,7 +8,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 export class CartService {
 
 
-  cartItemList: any = [];
+  cartItemList = [];
 
   constructor(
     private http: HttpClient

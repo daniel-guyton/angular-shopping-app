@@ -27,9 +27,8 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartService.getTotalPrice().subscribe((total: number) => {
-      this.grandTotal = total
-    })
+    this.grandTotal = this.cartService.getTotalPrice()
+
     this.cartService.getUserCart()
     .subscribe((res: Response) => {
       this.cartItemList = res

@@ -19,11 +19,14 @@ export class CartComponent implements OnInit {
   ) {
   }
 
-  deleteItem(product: any) {
-    const index: number = this.cartItemList.indexOf(product)
-    if (index !== -1) {
-      this.cartItemList.splice(index, 1);
-    }
+  deleteItemFromCart(product: any) {
+    this.cartService.deleteProductFromCart(product)
+    .subscribe(() => {
+      const index: number = this.cartItemList.indexOf(product)
+      if (index !== -1) {
+        this.cartItemList.splice(index, 1);
+      }
+    })
   }
 
   ngOnInit(): void {

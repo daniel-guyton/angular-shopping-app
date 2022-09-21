@@ -16,6 +16,12 @@ export class CartService {
 
 
 
+  deleteProductFromCart(product: any) {
+    return this.http.delete(`${process.env.NG_APP_API_GW}/${product.id}`)
+    .pipe((): any => {
+      console.log('sucess')
+    })
+  }
   addToCart(product: any) {
     const headers = new HttpHeaders(
       {

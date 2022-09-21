@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {faTrash, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {CartService} from 'src/app/services/cart.service';
 import {Router} from '@angular/router'
-import { ApiService } from 'src/app/services/api.service';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -29,11 +27,11 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.grandTotal = this.cartService.getTotalPrice()
     this.cartService.getUserCart()
     .subscribe((res: Response) => {
       this.cartItemList = res
       console.log(this.cartItemList)
-      this.grandTotal = this.cartService.getTotalPrice()
     })
   }
 

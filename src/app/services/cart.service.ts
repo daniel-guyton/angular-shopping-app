@@ -33,11 +33,12 @@ export class CartService {
     return this.http.get<any>(process.env.NG_APP_API_GW + '/getUserCart')
     .pipe(map((res: any) => {
       console.log(res)
+      this.cartItemList = res
       return res;
     }))
   }
 
-  getTotalPrice(): any {
+  getTotalPrice(): number {
     return this.cartItemList.reduce((total: number, item: any) => total + (item.product.price * item.qty), 0)
   }
 }

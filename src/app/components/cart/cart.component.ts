@@ -13,7 +13,7 @@ import { of } from 'rxjs';
 export class CartComponent implements OnInit {
   trash: IconDefinition= faTrash
   public cartItemList: any;
-  grandTotal: any;
+  grandTotal!: number;
 
   constructor(
     private cartService: CartService,
@@ -26,7 +26,6 @@ export class CartComponent implements OnInit {
     if (index !== -1) {
       this.cartItemList.splice(index, 1);
     }
-    this.grandTotal = this.cartService.getTotalPrice()
   }
 
   ngOnInit(): void {
@@ -34,6 +33,7 @@ export class CartComponent implements OnInit {
     .subscribe((res: Response) => {
       this.cartItemList = res
       console.log(this.cartItemList)
+      this.grandTotal = this.cartService.getTotalPrice()
     })
   }
 

@@ -30,28 +30,12 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.cartService.getcartItemList().subscribe((res) => {
-    //   this.cartItemList = res;
-    //   this.grandTotal = this.cartService.getTotalPrice()
-    // }, (error) => {
-    //   throw Nerw
-
-      // this.cartService.getUserCart().subscribe({
-      //   next: (res) => {
-      //   console.log(res)
-      //   this.cartItemList = res
-      //   this.grandTotal = this.cartService.getTotalPrice()
-      // },
-      // error: (err) => console.error(err)})
-
     this.cartService.getUserCart()
     .subscribe((res: Response) => {
       this.cartItemList = res
       console.log(this.cartItemList)
     })
   }
-
-
 
   async onBtnClick() {
     await this.router.navigateByUrl('/')

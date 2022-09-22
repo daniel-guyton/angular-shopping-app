@@ -19,23 +19,24 @@ export class CartComponent implements OnInit {
   ) {
   }
 
-  deleteItemFromCart(product: any) {
-    this.cartService.deleteProductFromCart(product)
-    .subscribe(() => {
-      const index: number = this.cartItemList.indexOf(product)
-      if (index !== -1) {
-        this.cartItemList.splice(index, 1);
-      }
-    })
-  }
+
 
   ngOnInit(): void {
-    this.grandTotal = this.cartService.getTotalPrice()
-
     this.cartService.getUserCart()
     .subscribe((res: Response) => {
       this.cartItemList = res
       console.log(this.cartItemList)
+    })
+  }
+
+  deleteItemFromCart(product: any) {
+    this.cartService.deleteProductFromCart(product).subscribe({
+      error: (err) => console.log(err),
+    }).add(() => {
+        const index: number = this.cartItemList.body.indexOf(product)
+        if (index !== -1) {
+          this.cartItemList.body.splice(index, 1);
+        }
     })
   }
 

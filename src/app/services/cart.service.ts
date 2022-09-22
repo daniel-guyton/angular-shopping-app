@@ -17,10 +17,10 @@ export class CartService {
 
 
   deleteProductFromCart(product: any) {
-    return this.http.delete(`${process.env.NG_APP_API_GW}/${product.id}`)
-    .pipe((): any => {
-      console.log('sucess')
-    })
+    return this.http.delete<any>(`${"https://hydn41hyd8.execute-api.ap-southeast-2.amazonaws.com/test"}/${product.id}`)
+    // .pipe((): any => {
+    //   console.log('sucess')
+    // })
   }
   addToCart(product: any) {
     const headers = new HttpHeaders(
@@ -29,14 +29,14 @@ export class CartService {
         "Access-Control-Allow-Methods": "*"
       }
     )
-    return this.http.post<any>(process.env.NG_APP_API_GW, product, {...headers})
+    return this.http.post<any>("https://hydn41hyd8.execute-api.ap-southeast-2.amazonaws.com/test", product, {...headers})
     .pipe(map((product): any => {
       console.log(product)
     }))
   }
 
   getUserCart() {
-    return this.http.get<any>(process.env.NG_APP_API_GW + '/getUserCart')
+    return this.http.get<any>("https://hydn41hyd8.execute-api.ap-southeast-2.amazonaws.com/test" + '/getUserCart')
     .pipe(map((res: any) => {
       console.log(res)
       this.cartItemList = res
@@ -44,7 +44,4 @@ export class CartService {
     }))
   }
 
-  getTotalPrice(): number {
-    return this.cartItemList.reduce((total: number, item: any) => total + (item.product.price * item.qty), 0)
-  }
 }

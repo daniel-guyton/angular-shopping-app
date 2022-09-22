@@ -32,10 +32,9 @@ export class CartComponent implements OnInit {
 
   handleQuantityChange (event: any, productObj: any) {
     console.log(event.target.value)
+    console.log(productObj)
     // console.log(event.value)
-    this.cartService.updateCartQuantity(event.target.value, productObj.id).subscribe({
-      error: (err) => console.log(err),
-    })
+    this.cartService.updateCartQuantity(event.target.value, productObj.product.id).subscribe()
   }
 
   deleteItemFromCart(product: ProductItem) {
@@ -50,6 +49,7 @@ export class CartComponent implements OnInit {
         }
     })
   }
+
 
   async onBtnClick() {
     await this.router.navigateByUrl('/')

@@ -6,9 +6,11 @@
         <div *ngFor="let item of cartItemList.body" class="border-product">
         <tr class="product-item">
           <td><img src="{{item.product.img_src}}" alt="image of shoe"></td>
-          <td>{{item.product.name}}</td>
-          <td>{{item.product.price}}</td>
-          <td>{{item.qty}}</td>
+          <div class="item-details">
+            <td><h2>{{item.product.name}}</h2></td>
+            <td>Price: {{item.product.price}}</td>
+            <td>Quantity: {{item.qty}}</td>
+          </div>
           <td *ngIf="item"><fa-icon class="trash" [icon]="trash" (click)="deleteItemFromCart(item)"></fa-icon></td>
         </tr>
        </div>

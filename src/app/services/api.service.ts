@@ -29,7 +29,7 @@ export class ApiService {
 
 
   getProducts() {
-   return this.http.get<any>(process.env.NG_APP_API_GW)
+   return this.http.get<any>("https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test")
     .pipe(map((res: Response) => {
       console.log(res)
       return res;

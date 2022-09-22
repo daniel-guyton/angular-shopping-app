@@ -26,15 +26,15 @@ export class CartComponent implements OnInit {
     this.cartService.getUserCart()
     .subscribe((res: Response) => {
       this.cartItemList = res
-      console.log(this.cartItemList)
     })
   }
 
   handleQuantityChange (event: any, productObj: any) {
-    console.log(event.target.value)
-    console.log(productObj)
+    const newQuantity = parseInt(event.target.value)
+    console.log('Event', typeof newQuantity)
+    console.log("Productid", productObj.product.id)
     // console.log(event.value)
-    this.cartService.updateCartQuantity(event.target.value, productObj.product.id).subscribe()
+    this.cartService.updateCartQuantity(newQuantity, productObj.product.id).subscribe()
   }
 
   deleteItemFromCart(product: ProductItem) {

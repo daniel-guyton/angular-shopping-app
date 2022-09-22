@@ -15,20 +15,17 @@ export class CartService {
     ) {}
 
   deleteProductFromCart(productObj: any) {
-    return this.http.delete<any>(`${process.env.NG_APP_API_GW}/${productObj.product.id}`)
-    // .pipe((): any => {
-    //   console.log('sucess')
-    // })
+    return this.http.delete<any>(`${"https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test"}/${productObj.product.id}`)
   }
   addToCart(product: any) {
-    return this.http.post<any>(process.env.NG_APP_API_GW, product)
+    return this.http.post<any>("https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test", product)
     .pipe(map((product): any => {
       console.log(product)
     }))
   }
 
   getUserCart() {
-    return this.http.get<any>(process.env.NG_APP_API_GW + '/getUserCart')
+    return this.http.get<any>("https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test" + '/getUserCart')
     .pipe(map((res: any) => {
       console.log(res)
       this.cartItemList = res
@@ -37,7 +34,14 @@ export class CartService {
   }
 
 
-  updateCartQuantity(quantity: number, product: any) {
-    return this.http.patch<any>(process.env.NG_APP_API_GW, {qty: quantity, product})
+  updateCartQuantity(quantity: number, product: number): Observable<any> {
+    console.log('quantity', typeof quantity)
+    console.log('proudct', typeof product)
+    const body = {
+      qty: quantity,
+      product
+    }
+
+    return this.http.patch<any>("https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test", body)
   }
 }

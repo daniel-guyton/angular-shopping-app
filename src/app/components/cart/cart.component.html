@@ -14,7 +14,7 @@
               min="1"
               max="10"
               value="{{item.qty}}"
-              (change)="handleQuantityChange($event, item.product)"
+              (change)="handleQuantityChange($event, item)"
               ></td>
           </div>
           <td *ngIf="item"><fa-icon class="trash" [icon]="trash" (click)="deleteItemFromCart(item)"></fa-icon></td>

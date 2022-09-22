@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {faTrash, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {CartService} from 'src/app/services/cart.service';
 import {Router} from '@angular/router'
+import { ProductItem } from 'src/common/types';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,7 @@ import {Router} from '@angular/router'
 })
 export class CartComponent implements OnInit {
   trash: IconDefinition= faTrash
-  public cartItemList: any;
+  cartItemList: any;
   grandTotal!: number;
 
   constructor(
@@ -29,10 +30,20 @@ export class CartComponent implements OnInit {
     })
   }
 
-  deleteItemFromCart(product: any) {
+  handleQuantityChange (event: any, productObj: any) {
+    console.log(event.target.value)
+    // console.log(event.value)
+    this.cartService.updateCartQuantity(event.target.value, productObj.id).subscribe({
+      error: (err) => console.log(err),
+    })
+  }
+
+  deleteItemFromCart(product: ProductItem) {
+    console.log("This is the product", product)
     this.cartService.deleteProductFromCart(product).subscribe({
       error: (err) => console.log(err),
     }).add(() => {
+    console.log("This is the cart item list", this.cartItemList)
         const index: number = this.cartItemList.body.indexOf(product)
         if (index !== -1) {
           this.cartItemList.body.splice(index, 1);

@@ -9,7 +9,7 @@
           <td>{{item.product.name}}</td>
           <td>{{item.product.price}}</td>
           <td>{{item.qty}}</td>
-          <td><fa-icon class="trash" [icon]="trash" (click)="deleteItemFromCart(item.product)"></fa-icon></td>
+          <td *ngIf="item"><fa-icon class="trash" [icon]="trash" (click)="deleteItemFromCart(item)"></fa-icon></td>
         </tr>
        </div>
       </table>

@@ -12,7 +12,7 @@ export class CartService {
 
   constructor(private readonly http: HttpClient) {}
 
-  deleteFromCart = (productObj: ProductItemWithQty): Observable<ProductItemWithQty> =>
+  deleteProductFromCart = (productObj: ProductItemWithQty): Observable<ProductItemWithQty> =>
     this.http.delete<ProductItemWithQty>(`${process.env.NG_APP_API_GW}/${productObj.product.id}`);
 
   addToCart = (product: ProductItem): Observable<ProductItem> =>

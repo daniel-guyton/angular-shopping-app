@@ -1,47 +1,45 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { map, Observable } from 'rxjs'
+
+import { ProductItemWithQty, ProductItem } from 'src/common/types'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  cartItemList = []
 
+  constructor (
+    private readonly http: HttpClient
+  ) {}
 
-  cartItemList = [];
-
-  constructor(
-    private http: HttpClient
-    ) {}
-
-  deleteProductFromCart(productObj: any) {
-    return this.http.delete<any>(`${"https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test"}/${productObj.product.id}`)
-  }
-  addToCart(product: any) {
-    return this.http.post<any>("https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test", product)
-    .pipe(map((product): any => {
-      console.log(product)
-    }))
+  deleteProductFromCart (productObj: ProductItemWithQty): Observable<HttpResponse<string>> {
+    return this.http.delete<any>(`${process.env.NG_APP_API_GW}/${productObj.product.id}`)
   }
 
-  getUserCart() {
-    return this.http.get<any>("https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test" + '/getUserCart')
-    .pipe(map((res: any) => {
-      console.log(res)
-      this.cartItemList = res
-      return res;
-    }))
+  addToCart (product: ProductItem): Observable<any> {
+    return this.http.post<any>(process.env.NG_APP_API_GW, product)
+      .pipe(map((product): void => {
+        console.log(product)
+      }))
   }
 
+  getUserCart (): Observable<any> {
+    return this.http.get<any>(process.env.NG_APP_API_GW + '/getUserCart')
+      .pipe(map((res: any) => {
+        console.log(res)
+        this.cartItemList = res
+        return res
+      }))
+  }
 
-  updateCartQuantity(quantity: number, product: number): Observable<any> {
-    console.log('quantity', typeof quantity)
-    console.log('proudct', typeof product)
+  updateCartQuantity (quantity: number, product: number): Observable<any> {
     const body = {
       qty: quantity,
       product
     }
 
-    return this.http.patch<any>("https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test", body)
+    return this.http.patch<any>(process.env.NG_APP_API_GW, body)
   }
 }

@@ -1,16 +1,15 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { map, Observable } from 'rxjs'
 // import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
-
 export class ApiService {
-  constructor(
-    private http: HttpClient
+  constructor (
+    private readonly http: HttpClient
   ) {}
 
   // private handleError(error: HttpErrorResponse) {
@@ -27,12 +26,11 @@ export class ApiService {
   //   return throwError(() => new Error('Something bad happened; please try again later.'));
   // }
 
-
-  getProducts() {
-   return this.http.get<any>("https://frbd4qoyy7.execute-api.ap-southeast-2.amazonaws.com/test")
-    .pipe(map((res: Response) => {
-      console.log(res)
-      return res;
-    }))
+  getProducts (): Observable<any> {
+    return this.http.get<any>(process.env.NG_APP_API_GW)
+      .pipe(map((res: Response) => {
+        console.log(res)
+        return res
+      }))
   }
 }

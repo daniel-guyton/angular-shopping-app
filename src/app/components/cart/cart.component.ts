@@ -3,7 +3,7 @@ import { faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 
-import { ProductItemWithQty } from 'src/common/types';
+import { ProductItemWithQty } from 'src/types/types';
 
 @Component({
   selector: 'app-cart',
@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
     this.cartService
       .deleteProductFromCart(product)
       .subscribe({
-        error: (err: Error) => console.log(err)
+        error: err => console.log(err)
       })
       .add(() => {
         const index: number = this.cartItemList.body.indexOf(product);

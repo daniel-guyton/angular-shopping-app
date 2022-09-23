@@ -1,16 +1,23 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
   env: {
     browser: true,
     es2021: true
   },
-  extends: 'standard-with-typescript',
+  extends: [
+    "standard-with-typescript",
+  "plugin:@typescript-eslint/recommended"],
   overrides: [
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: 'angular-shopping-app/tsconfig.app.json'
+    project: "./tsconfig.json",
+    ecmaVersion: 12,
+    sourceType: "module",
+    tsconfigRootDir: __dirname,
   },
   rules: {
-  }
+  },
+  plugins: [
+    "@typescript-eslint"
+  ],
 }

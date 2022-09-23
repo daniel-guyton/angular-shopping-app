@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { map, Observable } from 'rxjs'
 
@@ -14,32 +14,26 @@ export class CartService {
     private readonly http: HttpClient
   ) {}
 
-  deleteProductFromCart (productObj: ProductItemWithQty): Observable<HttpResponse<string>> {
-    return this.http.delete<any>(`${process.env.NG_APP_API_GW}/${productObj.product.id}`)
+  deleteProductFromCart (productObj: ProductItemWithQty): Observable<ProductItemWithQty> {
+    return this.http.delete<ProductItemWithQty>(`${process.env.NG_APP_API_GW}/${productObj.product.id}`)
   }
 
-  addToCart (product: ProductItem): Observable<any> {
-    return this.http.post<any>(process.env.NG_APP_API_GW, product)
-      .pipe(map((product): void => {
-        console.log(product)
-      }))
+  addToCart (product: ProductItem): Observable<ProductItem> {
+    return this.http.post<ProductItem>(process.env.NG_APP_API_GW, product)
   }
 
   getUserCart (): Observable<any> {
-    return this.http.get<any>(process.env.NG_APP_API_GW + '/getUserCart')
+    return this.http.get<never>(process.env.NG_APP_API_GW + '/getUserCart')
       .pipe(map((res: any) => {
-        console.log(res)
         this.cartItemList = res
         return res
       }))
   }
 
-  updateCartQuantity (quantity: number, product: number): Observable<any> {
-    const body = {
+  updateCartQuantity (quantity: number, product: number): Observable<number> {
+    return this.http.patch<never>(process.env.NG_APP_API_GW, {
       qty: quantity,
       product
-    }
-
-    return this.http.patch<any>(process.env.NG_APP_API_GW, body)
+    })
   }
 }

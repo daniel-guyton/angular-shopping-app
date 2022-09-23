@@ -23,8 +23,9 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-
   addToCart(item: any) {
-    this.cartService.addToCart(item)
+    this.cartService.addToCart(item).subscribe({
+      error: (err) => console.log(err)
+    })
   }
 }

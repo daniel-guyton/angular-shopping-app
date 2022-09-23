@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
-import {CartService} from 'src/app/services/cart.service';
-import {Router} from '@angular/router'
-import { ApiService } from 'src/app/services/api.service';
+import { Component, OnInit } from '@angular/core'
+import { faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { CartService } from 'src/app/services/cart.service'
+import { Router } from '@angular/router'
+
+import { ProductItemWithQty } from 'src/common/types'
 
 @Component({
   selector: 'app-cart',
@@ -10,32 +11,40 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  trash: any = faTrash
-  products: any = []
-  grandTotal: any;
+  trash: IconDefinition = faTrash
+  cartItemList: any
+  grandTotal!: number
 
-  constructor(
-    private cartService: CartService,
-    private router: Router,
+  constructor (
+    private readonly cartService: CartService,
+    private readonly router: Router
   ) {
   }
 
-  deleteItem(product: any) {
-    const index: number = this.products.indexOf(product)
-    if (index !== -1) {
-      this.products.splice(index, 1);
-    }
-    this.grandTotal = this.cartService.getTotalPrice()
+  ngOnInit (): void {
+    this.cartService.getUserCart()
+      .subscribe((res: Response) => {
+        this.cartItemList = res
+      })
   }
 
-  ngOnInit(): void {
-    this.cartService.getProducts().subscribe(res => {
-      this.products = res;
-      this.grandTotal = this.cartService.getTotalPrice()
+  handleQuantityChange (event: any, productObj: ProductItemWithQty): void {
+    const newQuantity = parseInt(event.target.value)
+    this.cartService.updateCartQuantity(newQuantity, productObj.product.id).subscribe()
+  }
+
+  deleteItemFromCart (product: ProductItemWithQty): void {
+    this.cartService.deleteProductFromCart(product).subscribe({
+      error: (err) => console.log(err)
+    }).add(() => {
+      const index: number = this.cartItemList.body.indexOf(product)
+      if (index !== -1) {
+        this.cartItemList.body.splice(index, 1)
+      }
     })
   }
 
-  async onBtnClick() {
+  async onBtnClick (): Promise<void> {
     await this.router.navigateByUrl('/')
   }
 }

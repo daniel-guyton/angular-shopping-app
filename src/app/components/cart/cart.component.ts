@@ -23,7 +23,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  handleQuantityChange(event: any, productObj: ProductItemWithQty): void {
+  handleQuantityChange(event: Event, productObj: ProductItemWithQty): void {
+    if (!(event.target instanceof HTMLInputElement)) return;
     const newQuantity = parseInt(event.target.value);
     this.cartService.updateCartQuantity(newQuantity, productObj.product.id).subscribe();
   }

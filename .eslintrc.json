@@ -1,0 +1,123 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+{
+    "env": {
+        "es6": true
+    },
+    "extends": [
+        "google",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint", "prettier", "html"],
+    "rules": {
+        "prettier/prettier": "error",
+        // allow to have type 'any' in code because some data do not have explicit type defined
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/member-delimiter-style": [
+            "error",
+            {
+                "multiline": {
+                    "delimiter": "semi",
+                    "requireLast": true
+                },
+                "singleline": {
+                    "delimiter": "semi",
+                    "requireLast": false
+                }
+            }
+        ],
+        // exempt Angular annotation
+        "new-cap": [
+            "error",
+            {
+                "capIsNewExceptions": [
+                    "Action",
+                    "Component",
+                    "Directive",
+                    "Dispatch",
+                    "HostListener",
+                    "HostBinding",
+                    "Select",
+                    "Selector",
+                    "SelectSnapshot",
+                    "NgModule",
+                    "Injectable",
+                    "Optional",
+                    "Pipe",
+                    "ViewChild",
+                    "ViewChildren",
+                    "Input",
+                    "Inject",
+                    "Output",
+                    "State",
+                    "Intercom",
+                    "ContentChildren",
+                    "ContentChild",
+                    "Self"
+                ]
+            }
+        ],
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "quotes": ["error", "single", { "allowTemplateLiterals": true, "avoidEscape": true }],
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "off",
+        "@typescript-eslint/no-empty-function": ["error", { "allow": ["arrowFunctions", "constructors", "functions"] }],
+        "no-empty-function": ["off", { "allow": ["arrowFunctions", "constructors", "functions"] }],
+        "no-useless-constructor": "off",
+        "no-return-assign": "off",
+        "dot-notation": ["error", { "allowKeywords": true }],
+        "max-len": ["error", { "code": 160, "ignoreStrings": true }],
+        "no-console": 1,
+        "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+            "off",
+            {
+                "accessibility": "explicit"
+            }
+        ],
+        "@typescript-eslint/no-use-before-define": "error",
+        "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+        "id-blacklist": "off",
+        "id-match": "off",
+        "no-underscore-dangle": "off",
+        "object-curly-newline": ["error", { "consistent": true }],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
+        "no-param-reassign": "off",
+        "import/extensions": "off",
+        "import/order": "off",
+        "no-multi-spaces": ["error", { "exceptions": { "Property": true } }],
+        "require-jsdoc": "off",
+        "valid-jsdoc": "off",
+        "no-invalid-this": ["off"],
+        "arrow-parens": ["error", "as-needed"],
+        "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+        // TODO fix up implementations of non camel cased inputs, currently in warning state for temp fix
+        "camelcase": [1],
+        "require-await": ["error"],
+        "no-useless-catch": ["error"]
+    }
+}

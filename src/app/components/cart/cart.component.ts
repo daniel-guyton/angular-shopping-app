@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {faTrash, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {CartService} from 'src/app/services/cart.service';
-import {Router} from '@angular/router'
-import { ProductItem } from 'src/common/types';
+import { Component, OnInit } from '@angular/core'
+import { faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { CartService } from 'src/app/services/cart.service'
+import { Router } from '@angular/router'
+
+import { ProductItemWithQty } from 'src/common/types'
 
 @Component({
   selector: 'app-cart',
@@ -10,48 +11,40 @@ import { ProductItem } from 'src/common/types';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  trash: IconDefinition= faTrash
-  cartItemList: any;
-  grandTotal!: number;
+  trash: IconDefinition = faTrash
+  cartItemList: any
+  grandTotal!: number
 
-  constructor(
-    private cartService: CartService,
-    private router: Router,
+  constructor (
+    private readonly cartService: CartService,
+    private readonly router: Router
   ) {
   }
 
-
-
-  ngOnInit(): void {
+  ngOnInit (): void {
     this.cartService.getUserCart()
-    .subscribe((res: Response) => {
-      this.cartItemList = res
-    })
+      .subscribe((res: Response) => {
+        this.cartItemList = res
+      })
   }
 
-  handleQuantityChange (event: any, productObj: any) {
+  handleQuantityChange (event: any, productObj: ProductItemWithQty): void {
     const newQuantity = parseInt(event.target.value)
-    console.log('Event', typeof newQuantity)
-    console.log("Productid", productObj.product.id)
-    // console.log(event.value)
     this.cartService.updateCartQuantity(newQuantity, productObj.product.id).subscribe()
   }
 
-  deleteItemFromCart(product: ProductItem) {
-    console.log("This is the product", product)
+  deleteItemFromCart (product: ProductItemWithQty): void {
     this.cartService.deleteProductFromCart(product).subscribe({
-      error: (err) => console.log(err),
+      error: (err) => console.log(err)
     }).add(() => {
-    console.log("This is the cart item list", this.cartItemList)
-        const index: number = this.cartItemList.body.indexOf(product)
-        if (index !== -1) {
-          this.cartItemList.body.splice(index, 1);
-        }
+      const index: number = this.cartItemList.body.indexOf(product)
+      if (index !== -1) {
+        this.cartItemList.body.splice(index, 1)
+      }
     })
   }
 
-
-  async onBtnClick() {
+  async onBtnClick (): Promise<void> {
     await this.router.navigateByUrl('/')
   }
 }

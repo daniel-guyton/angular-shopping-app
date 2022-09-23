@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { map, Observable } from 'rxjs'
 
-import { ProductItemWithQty, ProductItem } from 'src/common/types'
+import { ProductItemWithQty, ProductItem } from 'src/types/types'
 
 @Injectable({
   providedIn: 'root'

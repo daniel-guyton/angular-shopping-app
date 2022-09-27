@@ -13,21 +13,18 @@ export class CartService {
   constructor(private readonly http: HttpClient) {}
 
   deleteProductFromCart = (productObj: ProductItemWithQty): Observable<ProductItemWithQty> =>
-    this.http.delete<ProductItemWithQty>(`${process.env.NG_APP_API_GW}/${productObj.product.id}`);
-
-  addToCart = (product: ProductItem): Observable<ProductItem> =>
-    this.http.post<ProductItem>(process.env.NG_APP_API_GW, product);
-
-  getUserCart = (): Observable<any> =>
-    this.http.get<never>(process.env.NG_APP_API_GW + '/getUserCart').pipe(
-      map((res: any) => {
-        this.cartItemList = res;
-        return res;
-      })
+    this.http.delete<ProductItemWithQty>(
+      `${'https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test'}/${productObj.product.id}`
     );
 
+  addToCart = (product: ProductItem): Observable<ProductItem> =>
+    this.http.post<ProductItem>('https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test', product);
+
+  getUserCart = (): Observable<ProductItemWithQty[]> =>
+    this.http.get<never>('https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test' + '/getUserCart');
+
   updateCartQuantity = (quantity: number, product: number): Observable<any> =>
-    this.http.patch<never>(process.env.NG_APP_API_GW, {
+    this.http.patch<never>('https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test', {
       qty: quantity,
       product
     });

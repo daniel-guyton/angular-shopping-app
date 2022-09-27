@@ -18,9 +18,7 @@ export class CartComponent implements OnInit {
   constructor(private readonly cartService: CartService, private readonly router: Router) {}
 
   ngOnInit(): void {
-    this.cartService.getUserCart().subscribe((res: Response) => {
-      this.cartItemList = res;
-    });
+    this.cartService.getUserCart().subscribe((res: ProductItemWithQty[]) => (this.cartItemList = res));
   }
 
   handleQuantityChange(event: Event, productObj: ProductItemWithQty): void {

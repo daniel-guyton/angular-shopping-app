@@ -51,4 +51,19 @@ describe('CartService', () => {
     request.flush;
     // expect(fakeResponse).toEqual(dummyProduct);
   });
+  it('should make an HTTP PATCH to /test', () => {
+    const newQuantity = {
+      quantity: 1,
+      product: 1
+    };
+    service
+      .updateCartQuantity(newQuantity.quantity, newQuantity.product)
+      .subscribe(response => expect(response).toEqual(newQuantity));
+
+    const request = httpMock.expectOne(`https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test`);
+    expect(request.request.method).toEqual('PATCH');
+
+    request.flush;
+    // expect(fakeResponse).toEqual(dummyProduct);
+  });
 });

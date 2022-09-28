@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { ProductItem } from 'src/types/types';
 // import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -24,11 +25,6 @@ export class ApiService {
   // }
 
   getProducts(): Observable<any> {
-    return this.http.get<never>('https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test').pipe(
-      map((res: Response) => {
-        console.log(res);
-        return res;
-      })
-    );
+    return this.http.get<ProductItem[]>('https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test');
   }
 }

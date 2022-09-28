@@ -14,17 +14,19 @@ export class CartService {
 
   deleteProductFromCart = (productObj: ProductItemWithQty): Observable<ProductItemWithQty> =>
     this.http.delete<ProductItemWithQty>(
-      `${'https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test'}/${productObj.product.id}`
+      `${'https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test'}/${productObj.product.id}`
     );
 
   addToCart = (product: ProductItem): Observable<ProductItem> =>
-    this.http.post<ProductItem>('https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test', product);
+    this.http.post<ProductItem>('https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test', product);
 
-  getUserCart = (): Observable<ProductItemWithQty[]> =>
-    this.http.get<never>('https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test' + '/getUserCart');
+  getUserCart = (): Observable<any> =>
+    this.http.get<ProductItemWithQty[]>(
+      'https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test' + '/getUserCart'
+    );
 
   updateCartQuantity = (quantity: number, product: number): Observable<any> =>
-    this.http.patch<never>('https://0c05mdg8he.execute-api.ap-southeast-2.amazonaws.com/test', {
+    this.http.patch<never>('https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test', {
       qty: quantity,
       product
     });

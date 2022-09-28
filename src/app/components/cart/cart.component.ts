@@ -12,13 +12,14 @@ import { ProductItemWithQty } from 'src/types/types';
 })
 export class CartComponent implements OnInit {
   trash: IconDefinition = faTrash;
-  cartItemList: any;
+  cartItemList: any = '';
   grandTotal!: number;
 
   constructor(private readonly cartService: CartService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.cartService.getUserCart().subscribe((res: ProductItemWithQty[]) => (this.cartItemList = res));
+    console.log(this.cartItemList);
   }
 
   handleQuantityChange(event: Event, productObj: ProductItemWithQty): void {

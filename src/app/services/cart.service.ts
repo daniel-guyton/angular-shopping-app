@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Auth } from 'aws-amplify';
 import { map, Observable } from 'rxjs';
 
 import { ProductItemWithQty, ProductItem } from 'src/types/types';
@@ -14,19 +15,19 @@ export class CartService {
 
   deleteProductFromCart = (productObj: ProductItemWithQty): Observable<ProductItemWithQty> =>
     this.http.delete<ProductItemWithQty>(
-      `${'https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test'}/${productObj.product.id}`
+      `${'https://z3u5kppbcc.execute-api.ap-southeast-2.amazonaws.com/test'}/${productObj.product.id}`
     );
 
   addToCart = (product: ProductItem): Observable<ProductItem> =>
-    this.http.post<ProductItem>('https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test', product);
+    this.http.post<ProductItem>('https://z3u5kppbcc.execute-api.ap-southeast-2.amazonaws.com/test', product);
 
   getUserCart = (): Observable<any> =>
     this.http.get<ProductItemWithQty[]>(
-      'https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test' + '/getUserCart'
+      'https://z3u5kppbcc.execute-api.ap-southeast-2.amazonaws.com/test' + '/getUserCart'
     );
 
   updateCartQuantity = (quantity: number, product: number): Observable<any> =>
-    this.http.patch<never>('https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test', {
+    this.http.patch<never>('https://z3u5kppbcc.execute-api.ap-southeast-2.amazonaws.com/test', {
       qty: quantity,
       product
     });

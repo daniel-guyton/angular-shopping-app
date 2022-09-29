@@ -1,3 +1,12 @@
+export interface User {
+  email: string;
+  password: string;
+  givenName: string;
+  familyName: string;
+  code: string; // <--- this is the verification code that will be send to user email to verify email
+  showPassword: boolean;
+}
+
 export interface ProductItemWithQty {
   product: {
     id: number;

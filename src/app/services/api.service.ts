@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Auth } from 'aws-amplify';
 import { map, Observable } from 'rxjs';
 import { ProductItem } from 'src/types/types';
 // import { environment } from 'src/environments/environment';
@@ -23,8 +24,15 @@ export class ApiService {
   //   // Return an observable with a user-facing error message.
   //   return throwError(() => new Error('Something bad happened; please try again later.'));
   // }
+  myInit = async () => {
+    return {
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`
+      }
+    };
+  };
 
-  getProducts(): Observable<any> {
-    return this.http.get<ProductItem[]>('https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test');
-  }
+  getProducts = (): Observable<any> => {
+    return this.http.get<ProductItem[]>('https://z3u5kppbcc.execute-api.ap-southeast-2.amazonaws.com/test');
+  };
 }

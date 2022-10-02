@@ -26,7 +26,7 @@ export class ApiService {
   // }
 
   getProducts(): Observable<any> {
-    return this.http.get<ProductItem[]>(process.env['NG_APP_API_GW'], {
+    return this.http.get<ProductItem[]>(process2.env.NG_APP_API_GW, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('id_token')}`
       }

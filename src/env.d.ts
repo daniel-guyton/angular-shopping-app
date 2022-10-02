@@ -1,5 +1,5 @@
 /* eslint-disable no-var */
-declare var process: {
+declare var process2: {
   env: {
     NG_APP_ENV: string;
     NG_APP_API_GW: string;

@@ -26,7 +26,7 @@ export class ApiService {
   // }
 
   getProducts(): Observable<any> {
-    return this.http.get<ProductItem[]>('https://t2v38gb22d.execute-api.ap-southeast-2.amazonaws.com/test', {
+    return this.http.get<ProductItem[]>(process.env.NG_APP_API_GW, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('id_token')}`
       }

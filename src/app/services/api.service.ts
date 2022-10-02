@@ -25,6 +25,6 @@ export class ApiService {
   // }
 
   getProducts(): Observable<any> {
-    return this.http.get<ProductItem[]>('https://rdebjc4fkf.execute-api.ap-southeast-2.amazonaws.com/test');
+    return this.http.get<ProductItem[]>(process.env.NG_APP_API_GW);
   }
 }

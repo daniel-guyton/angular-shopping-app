@@ -1,29 +1,17 @@
-import {AfterViewInit, Component} from '@angular/core';
-import {faCartShopping, faSearch, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {Router} from '@angular/router'
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CognitoService } from 'src/app/services/cognito.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+export class HeaderComponent {
+  constructor(public _auth: CognitoService, public _router: Router) {}
 
-export class HeaderComponent implements AfterViewInit {
-
-  totalItems: number = 0
-  searchIcon: IconDefinition = faSearch
-  cartIcon: IconDefinition = faCartShopping
-  title: string = 'SHOPPING APP'
-
-  constructor(
-    private router: Router
-  ) {
-  }
-
-  ngAfterViewInit(): void {
-  }
-
-  async btnClick(): Promise<void> {
-    await this.router.navigateByUrl('/cart')
+  doLogout() {
+    this._auth.logOut();
+    this._router.navigateByUrl('/sign-in');
   }
 }

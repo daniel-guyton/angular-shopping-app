@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Auth } from 'aws-amplify';
 import { map, Observable } from 'rxjs';
 import { ProductItem } from 'src/types/types';
-// import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

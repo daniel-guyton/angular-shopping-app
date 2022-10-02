@@ -17,6 +17,12 @@
         "build": {
           "builder": "@ngx-env/builder:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "buffer",
+              "crypto-js",
+              "js-cookie",
+              "isomorphic-unfetch"
+           ],
             "outputPath": "dist/shopping-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -104,4 +110,5 @@
       }
     }
   }
+
 }

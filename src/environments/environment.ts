@@ -3,11 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  production: false,
   cognito: {
     userPoolId: 'ap-southeast-2_rMmsZN3Xl',
     userPoolWebClientId: '2gpbt2u3oefa19k9pmpjt5po7g'
   },
-  production: false
+  api_gw: process.env['NG_APP_API_GW']
 };
 
 /*

@@ -10,6 +10,9 @@ import { CognitoService } from 'src/app/services/cognito.service';
 export class HeaderComponent {
   constructor(public _auth: CognitoService, public _router: Router) {}
 
+  goToProducts() {
+    this._router.navigateByUrl('/products');
+  }
   doLogout() {
     this._auth.logOut();
     this._router.navigateByUrl('/sign-in');

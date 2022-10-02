@@ -25,6 +25,6 @@ export class ApiService {
   // }
 
   getProducts(): Observable<any> {
-    return this.http.get<ProductItem[]>(global.env['NG_APP_API_GW'] as string);
+    return this.http.get<ProductItem[]>(environment.api_gw!);
   }
 }

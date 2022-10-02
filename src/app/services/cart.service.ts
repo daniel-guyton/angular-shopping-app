@@ -14,16 +14,15 @@ export class CartService {
   constructor(private readonly http: HttpClient) {}
 
   deleteProductFromCart = (productObj: ProductItemWithQty): Observable<ProductItemWithQty> =>
-    this.http.delete<ProductItemWithQty>(`${global.env['NG_APP_API_GW'] as string}/${productObj.product.id}`);
+    this.http.delete<ProductItemWithQty>(`${environment.api_gw!}/${productObj.product.id}`);
 
   addToCart = (product: ProductItem): Observable<ProductItem> =>
-    this.http.post<ProductItem>(global.env['NG_APP_API_GW'] as string, product);
+    this.http.post<ProductItem>(environment.api_gw!, product);
 
-  getUserCart = (): Observable<any> =>
-    this.http.get<ProductItemWithQty[]>((global.env['NG_APP_API_GW'] as string) + '/getUserCart');
+  getUserCart = (): Observable<any> => this.http.get<ProductItemWithQty[]>(environment.api_gw + '/getUserCart');
 
   updateCartQuantity = (quantity: number, product: number): Observable<any> =>
-    this.http.patch<never>(global.env['NG_APP_API_GW'] as string, {
+    this.http.patch<never>(environment.api_gw!, {
       qty: quantity,
       product
     });

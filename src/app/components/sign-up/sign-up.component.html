@@ -1,36 +1,33 @@
-<div class="container" *ngIf="user">
-    <div class="row w-100 vh-100 justify-content-center align-items">
-        <div class="auth-box">
-            <div *ngIf="!isConfirmed">
-                <div class="header">
-                    <h2>Register</h2>
-                    <h4>Resgister Your account using below information</h4>
-                </div>
-
-                <div class="form">
-                    <input type="text" name="givemName" [(ngModel)]="user.givenName" placeholder="First Name">
-                    <input type="text" name="giveName" [(ngModel)]="user.familyName" placeholder="Last Name">
-                    <input type="email" name="email" [(ngModel)]="user.email" placeholder="Email address" autocomplete="off">
-                    <input [type]="user.showPassword ? 'text' : 'password'" name="password" [(ngModel)]="user.password" placeholder="Password">
-                    <div style="font-size: 12px; margin: 8px 0;">
-                        <input type="checkbox" [checked]="user.showPassword" (change)="user.showPassword = !user.showPassword">
-                        Show Password
-                    </div>
-                    <p>Already a member? <a href="/sign-in">Sign in</a></p>
-                    <button (click)="signUpWithCognito()">REGISTER</button>
-                </div>
-            </div>
-
-            <div *ngIf="isConfirmed">
-                <div class="header">
-                    <h2>Enter Code</h2>
-                    <h4 style="color: green;">A verification Code sent to {{user.email}}</h4>
-                </div>
-                <div class="form">
-                    <input type="text" name="verificationCode" placeholder="Enter verification code" [(ngModel)]="user.code">
-                    <button (click)="confirmSignUp()">CONFIRM</button>
-                </div>
-            </div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <form (ngSubmit)="register(regform)" #regform="ngForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" ngModel class="form-control">
         </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" ngModel class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
     </div>
+  </div>
+  <br/>
+  <div *ngIf="confirmCode" class="row message-row">
+    <h3>Please check your email for the validation code and enter it here:</h3>
+    <div class="col-lg-4">
+      <form (ngSubmit)="validateAuthCode(codeform)" #codeform="ngForm">
+        <div class="form-group">
+          <label for="code">Code</label>
+          <input type="text" name="code" id="code" ngModel class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Validate Code</button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="codeWasConfirmed" class="row message-row">
+    <h3>Verification Code was confirmed, please click <a routerLink="sign-in">here</a> to login</h3>
+  </div>
 </div>

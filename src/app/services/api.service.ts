@@ -24,15 +24,12 @@ export class ApiService {
   //   // Return an observable with a user-facing error message.
   //   return throwError(() => new Error('Something bad happened; please try again later.'));
   // }
-  myInit = async () => {
-    return {
-      headers: {
-        Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`
-      }
-    };
-  };
 
-  getProducts = (): Observable<any> => {
-    return this.http.get<ProductItem[]>('https://z3u5kppbcc.execute-api.ap-southeast-2.amazonaws.com/test');
-  };
+  getProducts(): Observable<any> {
+    return this.http.get<ProductItem[]>('https://t2v38gb22d.execute-api.ap-southeast-2.amazonaws.com/test', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('id_token')}`
+      }
+    });
+  }
 }

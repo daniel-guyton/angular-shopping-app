@@ -1,54 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CognitoService } from 'src/app/services/cognito.service';
-import { User } from 'src/types/types';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
-  user: User | undefined;
-  isConfirmed: boolean = false;
-  alertMessage: string = '';
-  showAlert: boolean = false;
+export class SignUpComponent {
+  confirmCode: boolean = false;
+  codeWasConfirmed: boolean = false;
+  error: string = '';
 
-  constructor(private router: Router, private cognitoService: CognitoService) {}
+  constructor(private auth: CognitoService, private _router: Router) {}
 
-  ngOnInit(): void {
-    this.user = {} as User;
-    this.isConfirmed = false;
+  register(form: NgForm) {
+    const email = form.value.email;
+    const password = form.value.password;
+    this.auth.register(email, password).subscribe({
+      next: () => (this.confirmCode = true),
+      error: err => {
+        console.log(err);
+        this.error = 'Registration Error has occued';
+      }
+    });
   }
 
-  public signUpWithCognito() {
-    if (this.user && this.user.email && this.user.password) {
-      this.cognitoService
-        .signUp(this.user)
-        .then(() => {
-          this.isConfirmed = true;
-        })
-        .catch((err: any) => this.displayAlert(err.message));
-    } else {
-      this.displayAlert('Missing email or password');
-    }
-  }
+  validateAuthCode(form: NgForm) {
+    const code = form.value.code;
 
-  public confirmSignUp() {
-    if (this.user) {
-      this.cognitoService
-        .confirmSignUp(this.user)
-        .then(() => {
-          this.router.navigate(['/sign-in']);
-        })
-        .catch((err: Error) => this.displayAlert(err.message));
-    } else {
-      this.displayAlert('Missing user information');
-    }
-  }
-
-  private displayAlert(message: string) {
-    this.alertMessage = message;
-    this.showAlert = true;
+    this.auth.confirmAuthCode(code).subscribe({
+      next: () => {
+        this.codeWasConfirmed = true;
+        this.confirmCode = false;
+      },
+      error: err => {
+        console.log(err);
+        this.error = 'Confirm Authorization Error has occured';
+      }
+    });
   }
 }

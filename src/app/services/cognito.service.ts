@@ -1,66 +1,100 @@
 import { Injectable } from '@angular/core';
-import { Amplify, API, Auth } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/types/types';
-import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { Observable } from 'rxjs';
+
+const poolData = {
+  UserPoolId: environment.cognito.userPoolId,
+  ClientId: environment.cognito.userPoolWebClientId
+};
+
+const userPool = new CognitoUserPool(poolData);
 @Injectable({
   providedIn: 'root'
 })
 export class CognitoService {
-  constructor() {
-    Amplify.configure({
-      Auth: {
-        ...environment.cognito,
-        ...environment.oauth
-      },
-      API: {
-        endpoints: [
-          {
-            endpoint: 'https://z3u5kppbcc.execute-api.ap-southeast-2.amazonaws.com/test',
-            custom_header: async () => {
-              return { Authorization: (await Auth.currentUserPoolUser()).signInUserSession.idToken.jwtToken };
-            }
-          }
-        ]
-      }
+  cognitoUser: any;
+  constructor() {}
+
+  register(email: string, password: string): Observable<any> {
+    const attributeList: CognitoUserAttribute[] = [];
+    return new Observable(subscriber => {
+      userPool.signUp(email, password, attributeList, null!, (err, res) => {
+        if (err) {
+          console.log('signUp error', err);
+          subscriber.error(err);
+        }
+
+        this.cognitoUser = res?.user;
+        console.log('signUp success', res);
+        subscriber.next(res);
+        subscriber.complete();
+      });
     });
   }
 
-  public signUp(user: User): Promise<any> {
-    return Auth.signUp({
-      username: user.email,
-      password: user.password,
-      attributes: {
-        email: user.email,
-        given_name: user.givenName,
-        family_name: user.familyName
-      }
+  confirmAuthCode(code: string) {
+    const user = {
+      Username: this.cognitoUser.username,
+      Pool: userPool
+    };
+
+    return new Observable(subscriber => {
+      const cognitoUser = new CognitoUser(user);
+      cognitoUser.confirmRegistration(code, true, (err, res) => {
+        if (err) {
+          console.log(err);
+          subscriber.error(err);
+        }
+        console.log('confirmAuthCode() sucess', res);
+        subscriber.next(res);
+        subscriber.complete();
+      });
     });
   }
 
-  public confirmSignUp(user: User): Promise<any> {
-    return Auth.confirmSignUp(user.email, user.code);
+  signIn(email: any, password: any) {
+    const authenticationData = {
+      Username: email,
+      Password: password
+    };
+
+    const authenticationDetails = new AuthenticationDetails(authenticationData);
+
+    const userData = {
+      Username: email,
+      Pool: userPool
+    };
+
+    const cognitoUser = new CognitoUser(userData);
+
+    return new Observable(subscriber => {
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: res => {
+          subscriber.next(res);
+          localStorage.setItem('id_token', res.getIdToken().getJwtToken());
+          console.log(res);
+          subscriber.complete;
+        },
+        onFailure: err => {
+          console.log(err);
+          subscriber.error(err);
+        }
+      });
+    });
   }
 
-  // method returns user info if any user is logged in with valied email and password
-  //logged in with valied email and password
-  public getUser(): Promise<any> {
-    return Auth.currentUserInfo();
+  isLoggedIn() {
+    return userPool.getCurrentUser() != null;
   }
 
-  public signIn(user: User): Promise<any> {
-    return Auth.signIn(user.email, user.password);
+  getAuthenticatedUser() {
+    console.log(userPool);
+    return userPool.getCurrentUser();
   }
 
-  public signOut(): Promise<any> {
-    return Auth.signOut();
-  }
-
-  public forgotPassword(user: User): Promise<any> {
-    return Auth.forgotPassword(user.email);
-  }
-
-  public forgotPasswordSubmit(user: User, new_password: string): Promise<any> {
-    return Auth.forgotPasswordSubmit(user.email, user.code, new_password);
+  logOut() {
+    this.getAuthenticatedUser()?.signOut();
+    this.cognitoUser = null;
   }
 }

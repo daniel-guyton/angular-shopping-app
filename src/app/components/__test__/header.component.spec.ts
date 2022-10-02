@@ -20,13 +20,4 @@ describe('HeaderComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('on button click', fakeAsync(() => {
-    spyOn(component, 'btnClick');
-
-    let button = fixture.debugElement.query(By.css('button')).nativeElement;
-    button.click();
-    tick();
-    expect(component.btnClick).toHaveBeenCalled();
-  }));
 });

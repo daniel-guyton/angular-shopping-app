@@ -11,7 +11,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { MessageModalComponent } from './components/message-modal/message-modal.component';
+import { HomeComponent } from './components/home/home.component';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,11 @@ import { MessageModalComponent } from './components/message-modal/message-modal.
     ProductsComponent,
     SignInComponent,
     SignUpComponent,
-    MessageModalComponent
+    HomeComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, HttpClientModule, FormsModule],
   providers: [],
+  // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   bootstrap: [AppComponent]
 })
 export class AppModule {}

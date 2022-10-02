@@ -15,7 +15,10 @@ export class ProductsComponent implements OnInit {
   constructor(private api: ApiService, private cartService: CartService, public auth: CognitoService) {}
 
   async ngOnInit(): Promise<void> {
-    (await this.api.getProducts()).subscribe((res: Response) => {
+    // if (authenticatedUser == null) {
+    //   return;
+    // }
+    await this.api.getProducts().subscribe((res: Response) => {
       this.products = res;
     });
   }

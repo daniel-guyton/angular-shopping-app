@@ -25,8 +25,8 @@ import { AuthInterceptor } from './auth.interceptor';
     HomeComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, HttpClientModule, FormsModule],
-  providers: [],
-  // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {}

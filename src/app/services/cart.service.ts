@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { ProductItemWithQty, ProductItem } from 'src/types/types';
 
@@ -14,16 +15,15 @@ export class CartService {
   constructor(private readonly http: HttpClient) {}
 
   deleteProductFromCart = (productObj: ProductItemWithQty): Observable<ProductItemWithQty> =>
-    this.http.delete<ProductItemWithQty>(`${process.env.NG_APP_API_GW ?? ''}/${productObj.product.id}`);
+    this.http.delete<ProductItemWithQty>(`${environment.api_gw ?? ''}/${productObj.product.id}`);
 
   addToCart = (product: ProductItem): Observable<ProductItem> =>
-    this.http.post<ProductItem>(process.env.NG_APP_API_GW ?? '', product);
+    this.http.post<ProductItem>(environment.api_gw ?? '', product);
 
-  getUserCart = (): Observable<any> =>
-    this.http.get<ProductItemWithQty[]>(process.env.NG_APP_API_GW ?? '' + '/getUserCart');
+  getUserCart = (): Observable<any> => this.http.get<ProductItemWithQty[]>(environment.api_gw ?? '' + '/getUserCart');
 
   updateCartQuantity = (quantity: number, product: number): Observable<any> =>
-    this.http.patch<never>(process.env.NG_APP_API_GW ?? '', {
+    this.http.patch<never>(environment.api_gw ?? '', {
       qty: quantity,
       product
     });

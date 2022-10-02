@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { map, Observable } from 'rxjs';
 import { ProductItem } from 'src/types/types';
-// import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class ApiService {
   // }
 
   getProducts(): Observable<any> {
-    return this.http.get<ProductItem[]>(process.env.NG_APP_API_GW, {
+    return this.http.get<ProductItem[]>(environment.api_gw, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('id_token')}`
       }

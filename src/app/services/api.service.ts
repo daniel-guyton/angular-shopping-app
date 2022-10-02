@@ -26,10 +26,6 @@ export class ApiService {
   // }
 
   getProducts(): Observable<any> {
-    return this.http.get<ProductItem[]>(environment.api_gw, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('id_token')}`
-      }
-    });
+    return this.http.get<ProductItem[]>(process.env.NG_APP_API_GW);
   }
 }

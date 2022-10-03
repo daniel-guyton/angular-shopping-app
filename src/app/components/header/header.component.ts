@@ -15,6 +15,7 @@ export class HeaderComponent {
   }
   doLogout() {
     this._auth.logOut();
+    localStorage.removeItem('id_token');
     this._router.navigateByUrl('/sign-in');
   }
 }

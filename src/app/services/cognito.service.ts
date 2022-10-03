@@ -95,6 +95,7 @@ export class CognitoService {
 
   logOut() {
     this.getAuthenticatedUser()?.signOut();
+    localStorage.clear();
     this.cognitoUser = null;
   }
 }

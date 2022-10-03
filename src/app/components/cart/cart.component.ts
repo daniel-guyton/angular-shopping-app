@@ -4,7 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 
 import { ProductItemWithQty } from 'src/types/types';
-import { CognitoService } from 'src/app/services/cognito.service';
+import { CognitoService } from '../../services/cognito.service';
 
 @Component({
   selector: 'app-cart',
@@ -52,6 +52,6 @@ export class CartComponent implements OnInit {
   }
 
   async onBtnClick(): Promise<void> {
-    await this.router.navigateByUrl('/');
+    await this.router.navigateByUrl('/products');
   }
 }

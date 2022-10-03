@@ -22,7 +22,7 @@ export class CartService {
   getUserCart = (): Observable<any> => this.http.get<ProductItemWithQty[]>(environment.api_gw + '/getUserCart');
 
   updateCartQuantity = (quantity: number, product: number): Observable<any> =>
-    this.http.patch<never>(environment.api_gw!, {
+    this.http.put<never>(environment.api_gw!, {
       qty: quantity,
       product
     });

@@ -6,7 +6,7 @@ import { CognitoService } from 'src/app/services/cognito.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['../form.styles.scss']
 })
 export class SignUpComponent {
   confirmCode: boolean = false;

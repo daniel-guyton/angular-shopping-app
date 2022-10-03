@@ -8,12 +8,13 @@
       <!-- <a (click)="btnClick()"><p>BAG</p></a> -->
         <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home Page</a></li>
         <li routerLinkActive="active"><a *ngIf="_auth.isLoggedIn()" routerLink="/restapi">Rest Call</a></li> -->
-        <li routerLinkActive="active"><a routerLink="/cart">Cart</a></li>
-        <li routerLinkActive="active"><a routerLink="/products">Products</a></li>
-        <li routerLinkActive="active">
-          <a *ngIf="!_auth.isLoggedIn()" routerLink="/sign-up">Register</a>
-          <a *ngIf="!_auth.isLoggedIn()" routerLink="/sign-in">Login</a>
-          <a *ngIf="_auth.isLoggedIn()" href="javascript:void(0)" (click)="doLogout()">Logout</a>
-        </li>
+          <li routerLinkActive="active"><a routerLink="/cart">Cart</a></li>
+          <li routerLinkActive="active"><a routerLink="/products">Products</a></li>
+          <li routerLinkActive="active">
+            <a *ngIf="!_auth.isLoggedIn()" routerLink="/sign-up">Register</a>
+            <a *ngIf="!_auth.isLoggedIn()" routerLink="/sign-in">Login</a>
+            <a *ngIf="_auth.isLoggedIn()" href="javascript:void(0)" (click)="doLogout()">Logout</a>
+          </li>
+
     </div>
   </div>

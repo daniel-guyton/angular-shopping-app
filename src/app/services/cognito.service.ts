@@ -53,7 +53,7 @@ export class CognitoService {
     });
   }
 
-  signIn(email: any, password: any) {
+  signIn(email: string, password: string) {
     const authenticationData = {
       Username: email,
       Password: password

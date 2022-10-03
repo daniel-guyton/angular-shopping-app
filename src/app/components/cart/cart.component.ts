@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 
 import { ProductItemWithQty } from 'src/types/types';
+import { CognitoService } from '../../services/cognito.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,9 +16,17 @@ export class CartComponent implements OnInit {
   cartItemList: any = '';
   grandTotal!: number;
 
-  constructor(private readonly cartService: CartService, private readonly router: Router) {}
+  constructor(
+    private readonly cartService: CartService,
+    private readonly router: Router,
+    private auth: CognitoService
+  ) {}
 
   ngOnInit(): void {
+    var authenticatedUser = this.auth.getAuthenticatedUser();
+    if (authenticatedUser == null) {
+      return;
+    }
     this.cartService.getUserCart().subscribe((res: ProductItemWithQty[]) => (this.cartItemList = res));
     console.log(this.cartItemList);
   }
@@ -43,6 +52,6 @@ export class CartComponent implements OnInit {
   }
 
   async onBtnClick(): Promise<void> {
-    await this.router.navigateByUrl('/');
+    await this.router.navigateByUrl('/products');
   }
 }

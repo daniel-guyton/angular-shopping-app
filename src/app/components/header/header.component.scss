@@ -1,10 +1,17 @@
-.navbar {
+.navbar-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   color: #333333;
   height: 64px;
   padding: 0 3.90625vw;
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .title {
@@ -19,14 +26,36 @@
 
 .nav-content {
   display: flex;
-
 }
 
-.nav-content > a{
+.nav-content > a, li{
   text-decoration: none;
   color: #333333;
-  padding: 0px 10px;
   font-size: 16px;
+  list-style-type: none;
+}
+
+.navbar-content > li > a {
+  padding: 0px 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-content > li > a:after{
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+navbar-content > li > a:after {
+  width: 100%;
+  left: 0;
 }
 
 .nav-content > a > p:hover {

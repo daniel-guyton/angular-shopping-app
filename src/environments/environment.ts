@@ -4,6 +4,11 @@
 
 export const environment = {
   production: false,
+  cognito: {
+    userPoolId: 'ap-southeast-2_rMmsZN3Xl',
+    userPoolWebClientId: '2gpbt2u3oefa19k9pmpjt5po7g'
+  },
+  api_gw: 'https://s7gxdw8boa.execute-api.ap-southeast-2.amazonaws.com/test'
 };
 
 /*

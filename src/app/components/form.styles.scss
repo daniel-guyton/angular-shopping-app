@@ -1,0 +1,74 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+form {
+    margin:10% auto 0 auto;
+	padding:30px;
+	width: 360px;
+	height:auto;
+	overflow:hidden;
+	background: #F7F7F7;
+	border-radius:10px;
+}
+
+h1 {
+    text-align: center;
+    color: gray;
+}
+
+form label {
+	font-size:14px;
+	color:darkgray;
+	cursor:pointer;
+}
+
+form input, button[type=submit] {
+	margin:15px 0;
+	padding:15px 10px;
+	width:100%;
+	outline:none;
+	border:1px solid #bbb;
+	border-radius:20px;
+	display:inline-block;
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	        box-sizing:border-box;
+    -webkit-transition:0.2s ease all;
+	   -moz-transition:0.2s ease all;
+	    -ms-transition:0.2s ease all;
+	     -o-transition:0.2s ease all;
+	        transition:0.2s ease all;
+}
+
+form input[type=email]:focus,
+form input[type=password]:focus {
+	border-color:cornflowerblue;
+}
+
+button[type=submit] {
+	padding:15px 50px;
+	width:auto;
+	background: #4E6FF0;
+	border:none;
+	color:white;
+	cursor:pointer;
+	display:inline-block;
+	float:right;
+	clear:right;
+	-webkit-transition:0.2s ease all;
+	   -moz-transition:0.2s ease all;
+	    -ms-transition:0.2s ease all;
+	     -o-transition:0.2s ease all;
+	        transition:0.2s ease all;
+}
+
+button[type=submit]:hover {
+	opacity:0.8;
+}
+
+button[type=submit]:active {
+	opacity:0.4;
+}

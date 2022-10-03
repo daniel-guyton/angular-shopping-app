@@ -10,3 +10,90 @@ button:hover {
 img {
   max-height: 100px;
 }
+
+body {
+  margin-right: auto;
+  margin-left:  auto;
+  max-width: 960px;
+  padding-right: 10px;
+  padding-left:  10px;
+}
+
+
+
+
+
+//common css
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -12px;
+  margin-left: -12px;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.vh-100 {
+  width: 100% !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+header h4 {
+  margin-top: 10px;
+  font-weight: normal;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.4)
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form p {
+  text-align: right;
+}
+
+.form p a {
+  color: #000;
+  font-size: 14px;
+}
+
+.form > input {
+  height:  46px;
+  padding: 0 16;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  outline: 0;
+  margin-top: 20px;
+}
+
+.form > input:focus {
+  border-color: black;
+}
+
+.form button {
+  padding: 12px 10px;
+  border: 0;
+  background: black;
+  border-radius: 3px;
+  margin-top: 10px;
+  color: #f1f1f1;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.auth-box {
+  background-color: white;
+  padding: 48px 56px;
+  border: 2px solid black
+}

@@ -35,34 +35,30 @@
   list-style-type: none;
 }
 
-.navbar-content > li > a{
-  color: #333;
-  font-size: 20px;
-  margin: 0px 30px 0px 30px;
+.navbar-content > li > a {
+  padding: 0px 10px;
   text-decoration: none;
-  position: relative;
-
-  &:after {
-    bottom: -4px;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 0;
-    position: absolute;
-    background: #333;
-    opacity: 0.6;
-    transition: width 0.3s ease 0s, opacity 0.3s ease 0s;
-    width: 0
-  }
-
-
-  &:hover:after {
-    width: 100%;
-    opacity: 0.9
-  }
-
+  cursor: pointer;
 }
-// .nav-content > a > p:hover {
-//   border-bottom: 1px solid #333333;
-// }
+
+.navbar-content > li > a:after{
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+navbar-content > li > a:after {
+  width: 100%;
+  left: 0;
+}
+
+.nav-content > a > p:hover {
+  border-bottom: 1px solid #333333;
+}
 

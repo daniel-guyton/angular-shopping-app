@@ -1,6 +1,8 @@
+
+$primary: #4E6FF0;
+
 .class-product {
   margin-top: 20px;
-  padding: 0 3.90625vw;
 
 }
 
@@ -11,6 +13,35 @@
 
 .indi-product{
   border: 2px solid #333;
+}
+
+button {
+  padding:15px 50px;
+	width:auto;
+  border-radius:20px;
+	border: 1px solid $primary;
+  background: #fff;
+	color: $primary;
+	cursor:pointer;
+	display:inline-block;
+  margin-right: 5px;
+
+
+	-webkit-transition:0.2s ease all;
+	   -moz-transition:0.2s ease all;
+	    -ms-transition:0.2s ease all;
+	     -o-transition:0.2s ease all;
+	        transition:0.2s ease all;
+
+    &:active {
+      opacity:0.4;
+    }
+
+    &:hover {
+      opacity:0.8;
+      background: $primary;
+      color: #fff;
+    }
 }
 
 table {
@@ -27,15 +58,15 @@ table {
   padding-top: 10px;
 }
 
-button {
-  border: 1px solid;
-  background-color: #fff;
-  padding: 5px;
-  border-radius: 2px;
-  font-size: 14px;
-  margin-right: 5px;
+// button {
+//   border: 1px solid;
+//   background-color: #fff;
+//   padding: 5px;
+//   border-radius: 2px;
+//   font-size: 14px;
+//   margin-right: 5px;
 
-}
+// }
 
 button:hover {
   cursor: pointer;

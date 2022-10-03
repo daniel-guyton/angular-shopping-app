@@ -6,7 +6,7 @@ import { CognitoService } from 'src/app/services/cognito.service';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['../form.styles.scss']
 })
 export class SignInComponent {
   emailVerificationMessage: boolean = false;

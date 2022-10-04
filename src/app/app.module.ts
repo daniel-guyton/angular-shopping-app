@@ -14,6 +14,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthInterceptor } from './auth.interceptor';
 
+import { MatBadgeModule } from '@angular/material/badge';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,7 @@ import { AuthInterceptor } from './auth.interceptor';
     SignUpComponent,
     HomeComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, HttpClientModule, FormsModule, MatBadgeModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
 
   bootstrap: [AppComponent]

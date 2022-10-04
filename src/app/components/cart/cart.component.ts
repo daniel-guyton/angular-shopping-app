@@ -13,8 +13,9 @@ import { CognitoService } from '../../services/cognito.service';
 })
 export class CartComponent implements OnInit {
   trash: IconDefinition = faTrash;
-  cartItemList: any = '';
+  cartItemList: any = [];
   grandTotal!: number;
+  handler: any = null;
 
   constructor(
     private readonly cartService: CartService,
@@ -27,8 +28,53 @@ export class CartComponent implements OnInit {
     if (authenticatedUser == null) {
       return;
     }
-    this.cartService.getUserCart().subscribe((res: ProductItemWithQty[]) => (this.cartItemList = res));
-    console.log(this.cartItemList);
+    this.loadStripe();
+    this.cartService.getUserCart().subscribe((res: ProductItemWithQty[]) => {
+      this.cartItemList = res;
+      this.getTotalPriceAndItems(this.cartItemList.body);
+    });
+  }
+
+  pay(amount: any) {
+    var handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51Lp04PE7twaRpoQiu4khTsAM4DQ1KvgAHQNR42LxUJT46TksxTrddg2CWwsczZRnhXFpK4KzEVtQB3e2eBHH7EpY00kjSFtjmg',
+      locale: 'auto',
+      token: function (token: any) {
+        // You can access the token ID with `token.id`.
+        // Get the token ID to your server-side code for use.
+        console.log(token);
+        alert('Token Created!!');
+      }
+    });
+
+    handler.open({
+      name: 'Demo Site',
+      description: '2 widgets',
+      amount: amount * 100
+    });
+  }
+
+  loadStripe() {
+    if (!window.document.getElementById('stripe-script')) {
+      var s = window.document.createElement('script');
+      s.id = 'stripe-script';
+      s.type = 'text/javascript';
+      s.src = 'https://checkout.stripe.com/checkout.js';
+      s.onload = () => {
+        this.handler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51Lp04PE7twaRpoQiu4khTsAM4DQ1KvgAHQNR42LxUJT46TksxTrddg2CWwsczZRnhXFpK4KzEVtQB3e2eBHH7EpY00kjSFtjmg',
+          locale: 'auto',
+          token: function (token: any) {
+            // You can access the token ID with `token.id`.
+            // Get the token ID to your server-side code for use.
+            console.log(token);
+            alert('Payment Success!!');
+          }
+        });
+      };
+
+      window.document.body.appendChild(s);
+    }
   }
 
   handleQuantityChange(event: Event, productObj: ProductItemWithQty): void {
@@ -48,9 +94,19 @@ export class CartComponent implements OnInit {
         if (index !== -1) {
           this.cartItemList.body.splice(index, 1);
         }
+        this.getTotalPriceAndItems(this.cartItemList.body);
       });
   }
 
+  getTotalPriceAndItems(cartItemList: any) {
+    return {
+      totalPrice: cartItemList.reduce(
+        (totalPrice: number, cartItem: any) => totalPrice + cartItem.product.price * cartItem.qty,
+        0
+      ),
+      totalItems: cartItemList.reduce((totalItems: any, cartItem: any) => totalItems + cartItem.qty, 0)
+    };
+  }
   async onBtnClick(): Promise<void> {
     await this.router.navigateByUrl('/products');
   }

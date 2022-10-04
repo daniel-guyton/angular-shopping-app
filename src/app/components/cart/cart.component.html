@@ -21,9 +21,10 @@
         </tr>
        </div>
       </table>
-      <p>Total: {{grandTotal}}</p>
+      <p>Total items: {{this.getTotalPriceAndItems(cartItemList.body).totalItems}}</p>
+      <p>Total price: {{this.getTotalPriceAndItems(cartItemList.body).totalPrice}}</p>
       <button (click)="onBtnClick()">Continue Shopping</button>
-      <button>Checkout</button>
+      <button (click)="pay(this.getTotalPriceAndItems(cartItemList.body).totalPrice)">Checkout</button>
 
     </div>
   </div>

@@ -12,6 +12,7 @@ export class SignUpComponent {
   confirmCode: boolean = false;
   codeWasConfirmed: boolean = false;
   error: string = '';
+  show: boolean = false;
 
   constructor(private auth: CognitoService, private _router: Router) {}
 
@@ -25,6 +26,10 @@ export class SignUpComponent {
         this.error = 'Registration Error has occued';
       }
     });
+  }
+
+  password() {
+    this.show = !this.show;
   }
 
   validateAuthCode(form: NgForm) {

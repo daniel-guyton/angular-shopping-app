@@ -48,8 +48,8 @@ export class CartComponent implements OnInit {
     });
 
     handler.open({
-      name: 'Demo Site',
-      description: '2 widgets',
+      name: 'My Site',
+      description: '',
       amount: amount * 100
     });
   }

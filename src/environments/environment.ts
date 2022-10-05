@@ -8,7 +8,7 @@ export const environment = {
     userPoolId: 'ap-southeast-2_rMmsZN3Xl',
     userPoolWebClientId: '2gpbt2u3oefa19k9pmpjt5po7g'
   },
-  api_gw: 'https://5159kppq7a.execute-api.ap-southeast-2.amazonaws.com/test'
+  api_gw: 'https://ybljbo9kqi.execute-api.ap-southeast-2.amazonaws.com/test'
 };
 
 /*
